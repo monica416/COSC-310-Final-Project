@@ -1,8 +1,8 @@
-# **Movie Chat Bot**
+# **Movie Chat Bot - Documentaiton**
 
-COSC 310 Assignment **3** - Group 4
+COSC 310 **Individual Assignment** - Monica Rampaul (Group 4)
 
-*This repository is a copied and updated version of the original with the change history and files preserved for refactoring*
+*This project is a continuation of A3 created by Group 4. Updates made in this project will be listed within this README file*
 
 ## Table of Contents
 * [General Information](#general-information)

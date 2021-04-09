@@ -2,7 +2,7 @@
 
 COSC 310 **Individual Assignment** - Monica Rampaul (Group 4)
 
-*This project is a continuation of A3 created by Group 4. Updates made in this project will be listed within this README file*
+*This project is a continuation of A3 which was originally created by Group 4. Updates made in this project will be listed within this README file*
 
 ## Table of Contents
 * [General Information](#general-information)

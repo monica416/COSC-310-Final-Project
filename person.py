@@ -85,7 +85,6 @@ def otherRoles(person):
     print("IMDBot:", person.title(), "is in the following 5 movies: ")
     for i in range(5):
         print("\t", p.get('filmography')['actor'][i])
-    return p.get('filmography')['actor'][0] + ' >> Actor\'s top role'
 
 #Try to use/call otherRoles in this method because it is calling for filmogrpahy to avoid redundancy 
 #Get Bio of the person such as birthdate and other info

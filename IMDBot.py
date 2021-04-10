@@ -8,6 +8,7 @@ import spellinghandler as sp
 import synonyms as sy
 import postagging as pt
 from chatterbot import ChatBot
+import twitter as t
 
 bot = ChatBot('MovieBot')
 print('IMDBot: Hello There! My name is IMDBot. ', end='')
@@ -54,6 +55,13 @@ while True:
         elif (('who' in user_input) and ('played' in user_input) or ('voiced' in user_input)):
             if 'movie' in locals():
                 person = f.whoPlayed(userName, movie, person_name, movie_name)
+                pers = str(person)
+
+                view = input("IMDBot: Would you like to view recent tweets from " + pers + "?  ")
+                if (view.lower()[0] == "y"):
+                    t.searchUser(pers)
+
+                print(f'IMDBot: What would you like to know about {pers}?')
             else:
                 person = f.whoPlayed(userName, '', person_name, movie_name)
         
@@ -151,6 +159,12 @@ while True:
                 movie = f.giveSummary(movie)
             else:
                 print('IMDBot: Sorry, I don\'t know which movie you\'re asking about. Try to ask me to find a movie :)')
+
+        elif (("tweet" in user_input) or ("tweets" in user_input) or ("twitter" in user_input)):
+            # takes in the user input, asks which person's tweets that want to see and calls searchUser() from twitter.py
+            n = input("IMDBot: Ok, whose tweets would you like to know about?      ")
+            t.searchUser(n)
+            print("IMDBot: What else would you like to know? ")
 
         else:
             #print("ELSE")

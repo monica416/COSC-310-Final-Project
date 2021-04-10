@@ -1,5 +1,6 @@
 import imdb
 import synonyms as sy
+import twitter as t
 
 ia = imdb.IMDb() # Initializes the IMDb integration through an IMDbPy method
 
@@ -62,7 +63,14 @@ def findDirector(movie):
     try:
         if (len(movie['directors']) == 1):
             print('IMDBot: The director of ' + movie['title'] + ' is ' + movie['directors'][0]['name']) # outputs this if the movie has only one director
-            print('What would you like to know about the director?')
+            
+            view = input("IMDBot: Would you like to view " + movie['directors'][0]['name'] + "'s tweets? ")
+            if (view.lower()[0] == "y"):
+                t.searchUser(movie['directors'][0]['name'])
+                print('What else would you like to know about the director?')
+            else:
+                print('What would you like to know about the director?')
+
             return movie['directors'][0]
         else:
             c = 1
@@ -73,7 +81,14 @@ def findDirector(movie):
                     dirList += 'and ' + director['name']
                 c += 1
             print('IMDBot: The directors of ' + movie['title'] + ' are ' + dirList)
-            print('IMDBot: What would you like to know about the main director of ' + movie['title'] + '?')
+
+            view = input("IMDBot: Would you like to view " + dirList[0] + "'s tweets? ")
+            if (view.lower()[0] == "y"):
+                t.searchUser(dirList[0])
+                print('IMDBot: What else would you like to know about the main director of ' + movie['title'] + '?')
+            else:
+                print('IMDBot: What would you like to know about the main director of ' + movie['title'] + '?')
+
             return movie['directors'][0] # returns a person object in case of follow up questions (can only return one director properly or other functions might not work)
     except:
         print(f'IMDBot: Uh oh. I can\'t find any directors.')
@@ -161,7 +176,7 @@ def whoPlayed(userName, oldMovie, charName, newMovie_name):
             actor = movie['cast'][castID]
             if (str(character).lower().find(charName.lower()) != -1): #compares the role and the string in lowercase to compare
                 print(f'IMDBot: {character} is played by {actor}')
-                print(f'IMDBot: What would you like to know about {actor}?')
+                
                 return actor
             else:
                 castID += 1

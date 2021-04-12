@@ -82,12 +82,13 @@ We need to also download the corpus necessary for our NLP and program to run. To
 
 ## Classes
 
-The project has two distinct parts that make it work:
+The project has three distinct parts that make it work:
 
 1. The IMDb integration and the functions that allow the bot to output the requested information 
 2. The classes that handle natural language processing and allow the bot to better understand the user's inputs
+3. The API classes that integrate and use the Twitter and Wikipedia APIs in order to expand the range and quality of conversation between the chatbot and user.
 
-To see the class structure of the IMDb integration, take a look at the [UML Diagram](https://lucid.app/publicSegments/view/aebe824d-31ce-4685-9720-e142ce18f0fb/image.pdf)
+To see the class structure of the IMDb integration, take a look at the [UML Diagram](https://lucid.app/publicSegments/view/aebe824d-31ce-4685-9720-e142ce18f0fb/image.pdf) ->  THIS HAS NOT BEEN UPDATED FOR THE INDIVIDUAL PROJECT
 
 ### Main Class
 

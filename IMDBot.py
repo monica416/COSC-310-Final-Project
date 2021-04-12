@@ -9,6 +9,7 @@ import synonyms as sy
 import postagging as pt
 from chatterbot import ChatBot
 import twitter as t
+import wiki as w
 
 bot = ChatBot('MovieBot')
 print('IMDBot: Hello There! My name is IMDBot. ', end='')
@@ -57,11 +58,10 @@ while True:
                 person = f.whoPlayed(userName, movie, person_name, movie_name)
                 pers = str(person)
 
-                view = input("IMDBot: Would you like to view recent tweets from " + pers + "?  ")
-                if (view.lower()[0] == "y"):
-                    t.searchUser(pers)
+                t.wantsTwitterInfo(pers)
+                w.wikiInfo(pers)
 
-                print(f'IMDBot: What would you like to know about {pers}?')
+                print(f'IMDBot: What else would you like to know about {pers}?')
             else:
                 person = f.whoPlayed(userName, '', person_name, movie_name)
         
@@ -133,6 +133,7 @@ while True:
         elif (('production' and 'company') in user_input or sy.findSyns(user_input, 'companies') == 0):
             print("IMDBot: Okay, let me search the production companies for you!") # buffer for searching companies
             company = c.findCompany(movie) # list the production companies of the movie asked
+            w.wikiInfo(company[0])
             print('IMDBot: What else would you like to know about the company? :)')
 
         elif ('other' in user_input and sy.findSyns(user_input, 'produce')):
@@ -165,6 +166,11 @@ while True:
             n = input("IMDBot: Ok, whose tweets would you like to know about?      ")
             t.searchUser(n)
             print("IMDBot: What else would you like to know? ")
+
+        elif ("wiki" in user_input) or "wikipedia" in user_input:
+            t = input("IMDBot: Ok, what do you want to search on Wikipedia?      ")
+            w.wikiInfo(t)
+            print("IMDBot: what else can I help you with? ")
 
         else:
             #print("ELSE")

@@ -1,6 +1,7 @@
 import imdb
 import synonyms as sy
 import twitter as t
+import wiki as w
 
 ia = imdb.IMDb() # Initializes the IMDb integration through an IMDbPy method
 
@@ -13,7 +14,11 @@ def findMovie(userName): # Finds the movie requested by the user
         return ''
     else: 
         title = movie['title']
-        print(f'IMDBot: Ok! What do you want to know about {title}?') # confirms the movie
+        print("IMDBot: Movie has been found!")
+
+        w.wikiInfo(title + " (film)")
+
+        print(f'IMDBot: What else do you want to know about {title}?') # confirms the movie
         return movie # returns movie object
 
 def searchForMovie(userName, search):
@@ -64,12 +69,10 @@ def findDirector(movie):
         if (len(movie['directors']) == 1):
             print('IMDBot: The director of ' + movie['title'] + ' is ' + movie['directors'][0]['name']) # outputs this if the movie has only one director
             
-            view = input("IMDBot: Would you like to view " + movie['directors'][0]['name'] + "'s tweets? ")
-            if (view.lower()[0] == "y"):
-                t.searchUser(movie['directors'][0]['name'])
-                print('What else would you like to know about the director?')
-            else:
-                print('What would you like to know about the director?')
+            t.wantsTwitterInfo(movie['directors'][0]['name'])
+            w.wikiInfo(movie['directors'][0]['name'])
+            
+            print('What else would you like to know about the director?')
 
             return movie['directors'][0]
         else:
@@ -82,12 +85,10 @@ def findDirector(movie):
                 c += 1
             print('IMDBot: The directors of ' + movie['title'] + ' are ' + dirList)
 
-            view = input("IMDBot: Would you like to view " + dirList[0] + "'s tweets? ")
-            if (view.lower()[0] == "y"):
-                t.searchUser(dirList[0])
-                print('IMDBot: What else would you like to know about the main director of ' + movie['title'] + '?')
-            else:
-                print('IMDBot: What would you like to know about the main director of ' + movie['title'] + '?')
+            t.wantsTwitterInfo(dirList[0])
+            w.wikiInfo(dirList[0])
+
+            print('IMDBot: What else would you like to know about the main director of ' + movie['title'] + '?')
 
             return movie['directors'][0] # returns a person object in case of follow up questions (can only return one director properly or other functions might not work)
     except:

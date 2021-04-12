@@ -127,9 +127,7 @@ def getTweetInfo(user):
 
 ## Search for User ##
 """
-This is the class that is called first
-
-It searches for the username / twitter handle based on the name / person that was being talked about
+This class searches for the username / twitter handle based on the name / person that was being talked about
 """
 def searchUser(name):
     results = []
@@ -141,7 +139,7 @@ def searchUser(name):
         results.append(user.screen_name)
 
     while (found == False and idx <= len(results)):
-        print(results[idx])
+        print("IMDBot: ", results[idx])
         ans = input("IMDBot: Is this the correct twitter handle?      ")
 
         if (ans.lower()[0] == 'y'):
@@ -151,9 +149,23 @@ def searchUser(name):
             idx += 1
     
     if (found == False):
-        print("IMDBot: Sorry, there is no twitter accound for that person")
+        print("IMDBot: Sorry, there is no twitter account for that person")
+    else:
+        getTweetInfo(userName)
 
-    getTweetInfo(userName)
+## Wants twitter info ##
+"""
+First class that is called
+
+Asks the user if they would like to view tweets
+"""
+def wantsTwitterInfo(user):
+    view = input("IMDBot: Would you like to view " + user + "'s tweets? ")
+
+    if (view.lower()[0] == "y"):
+        searchUser(user)
+    else:
+        pass
 
 
 ## --- For Testing --- ##

@@ -2,6 +2,7 @@ from logging import info
 import imdb
 import film as f
 import synonyms as sy
+import wiki as w
 
 ia = imdb.IMDb()
 
@@ -105,12 +106,16 @@ def giveBio(person, x):
         elif(x==2):
             birthplace = p['birth info']['birth place']
             print("IMDBot: The birth place of ", person.title(),"is", birthplace)
+
+            w.wikiInfo(birthplace)
+
             return birthplace
         # x==3 gets latest movie the actor is working 
         elif(x==3):
             personName = person.title()
             latestFilm = p.get('filmography')['actor'][1]
             print(f"IMDBot: The latest movie {personName} has worked in is {latestFilm}")
+            w.wikiInfo(latestFilm + " (film)")
         elif(x==4):
             # Bio needs to made shorter
             print(p['biography']) 

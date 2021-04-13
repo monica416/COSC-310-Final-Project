@@ -14,6 +14,8 @@ COSC 310 **Individual Assignment** - Monica Rampaul (Group 4)
   - [Natural Language Processing](#natural-language-processing)
   - [Testing](#testing)
   - [GUI](#gui)
+  - [APIs](#api)
+* [Individual Project Changes](#individual-project-changes)
 * [Possible Improvements](#possible-improvements)
 
 
@@ -29,6 +31,8 @@ For this project, we created a responsive and interactive chatbot using Python w
 - spaCy 3.0.5 **with** Pipelines en_core_web_sm 3.0.0
 - pyspellchecker 0.6.1 
 - chatterbot 1.0.2
+- tweepy 3.10.0
+- wikipedia-api 0.5.4
 
 
 ## Setup
@@ -50,6 +54,10 @@ For this project, we created a responsive and interactive chatbot using Python w
 > $ pip install chatterbot
 
 > $ pip install chatterbot-corpus (Optional; See chatterTrainer.py under [Trainers/Utility](#trainers/utility))
+
+> $ pip install tweepy
+
+> $ pip install Wikipedia-API
 
 We need to also download the corpus necessary for our NLP and program to run. To do this:
 > Make sure to "$ pip install nltk" beforehand
@@ -74,12 +82,13 @@ We need to also download the corpus necessary for our NLP and program to run. To
 
 ## Classes
 
-The project has two distinct parts that make it work:
+The project has three distinct parts that make it work:
 
 1. The IMDb integration and the functions that allow the bot to output the requested information 
 2. The classes that handle natural language processing and allow the bot to better understand the user's inputs
+3. The API classes that integrate and use the Twitter and Wikipedia APIs in order to expand the range and quality of conversation between the chatbot and user.
 
-To see the class structure of the IMDb integration, take a look at the [UML Diagram](https://lucid.app/publicSegments/view/aebe824d-31ce-4685-9720-e142ce18f0fb/image.pdf)
+To see the class structure of the IMDb integration, take a look at the [UML Diagram](https://lucid.app/publicSegments/view/aebe824d-31ce-4685-9720-e142ce18f0fb/image.pdf) ->  THIS HAS NOT BEEN UPDATED FOR THE INDIVIDUAL PROJECT
 
 ### Main Class
 
@@ -140,7 +149,6 @@ To see the class structure of the IMDb integration, take a look at the [UML Diag
   - nerTrainerHelp makes the Strings easier to process for training.
 
 - chatterTrainer.py trains the chatterbot object used for generating procedural responses, it only needs to be run once to train, but can be run again if training   cases are added. The neural network training is stored in db.sqlite3 so that training doesn't have to occur at runtime. (To retrain and run chatterTrainer.py, you   must install chatterbot-corpus).
-   
 
 ### Testing
 
@@ -156,6 +164,50 @@ To see the class structure of the IMDb integration, take a look at the [UML Diag
 - This GUI is more of a proof of concept, as time constraints prevented implementation to the main runtime.
 - It can be run to see what it would look like, but chatbot interaction is nonfunctional
 
+### APIs
+
+#### twitter.py
+
+- This class integrates and uses the Twitter API for python, Tweepy. 
+- This class is used in order to relay relevant informaiton about tweets related to the conversation the bot is having with the user. The use of the Twitter API   makes it possible to find twitter users by searching, get latest tweets, as well as tweet statistics like the amount of likes, retweets, and the date and time that the tweet was posted.
+- The chatbot is able to take these peices of information retrieved by the Twitter API and include it in coversation with the user in order to provide more knowledge on topics being talked about as well as to expand the bot's capabilities in terms of topics of conversation.
+- This class has been implemented in numerous other classes in order to make the conversation flow better. These classes incldude: IMDBot.py, person.py, and film.py.
+
+#### wiki.py
+
+- This class integrates and uses the Wikipedia API for python, Wikipedia-API. 
+- This class is used in order to relay relevant information about anything that can be found on Wikipedia and integrate these definitions and findings into conversation with the user. The use of the Wikipedia API makes it possible to find Wikipedia pages related to the conversation with the user as well as many attributes of the page. This includes the title of the page, a summary of the page, the sections of the page, the categories of the page, if the page exists at all, the entire text of the page, and the page's URL.
+- The chatbot is able to take these peices of information from the Wikipedia pages that are found and include the information / present the information in conversation with the user. This helps to expand the conversation outside of the scope of just movies which gives the user and chatbot more context based on the conversation being had.
+- This calss has been implemented in numerous other calsses in order to make the conversation flow better. These calsses include: IMDBot.py, person.py, and film.py.
+
+## Individual Project Changes
+
+### APIs
+
+- Tweepy -> Twitter API for Python
+- Wikipedia-API -> Wikipedia API for Python
+
+### Installations
+
+> $ pip install tweepy
+
+> $ pip install Wikipedia-API
+
+### API Classes and Integration
+
+#### twitter.py
+
+- This class integrates and uses the Twitter API for python, Tweepy. 
+- This class is used in order to relay relevant informaiton about tweets related to the conversation the bot is having with the user. The use of the Twitter API   makes it possible to find twitter users by searching, get latest tweets, as well as tweet statistics like the amount of likes, retweets, and the date and time that the tweet was posted.
+- The chatbot is able to take these peices of information retrieved by the Twitter API and include it in coversation with the user in order to provide more knowledge on topics being talked about as well as to expand the bot's capabilities in terms of topics of conversation.
+- This class has been implemented in numerous other classes in order to make the conversation flow better. These classes incldude: IMDBot.py, person.py, and film.py.
+
+#### wiki.py
+
+- This class integrates and uses the Wikipedia API for python, Wikipedia-API. 
+- This class is used in order to relay relevant information about anything that can be found on Wikipedia and integrate these definitions and findings into conversation with the user. The use of the Wikipedia API makes it possible to find Wikipedia pages related to the conversation with the user as well as many attributes of the page. This includes the title of the page, a summary of the page, the sections of the page, the categories of the page, if the page exists at all, the entire text of the page, and the page's URL.
+- The chatbot is able to take these peices of information from the Wikipedia pages that are found and include the information / present the information in conversation with the user. This helps to expand the conversation outside of the scope of just movies which gives the user and chatbot more context based on the conversation being had.
+- This calss has been implemented in numerous other calsses in order to make the conversation flow better. These calsses include: IMDBot.py, person.py, and film.py.
 
 ## Possible Improvements
 

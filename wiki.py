@@ -77,15 +77,16 @@ This is the function that is first called from the other classes.
 Takes the user input including what the user wants to know, find the wikipedia page (if it exists) and 
     outputs the relevant info for the user. 
 """
-def wikiInfo(topic):
+def wikiInfo(topic, userName):
     try:
-        ans = input("IMDBot: Would you like some Wikipedia informaiton on this?      ")
+        print("IMDBot: Would you like some Wikipedia informaiton on this?")
+        ans = input(f'{userName}: ')
         
         if (ans.lower()[0] == 'y'):
             print("IMDBot: Ok, let me see if i can find a the Wikipedia page...")
             if (getPage(topic).exists()):
-                print("IMDBot: A page has been found! What would you like to know from the Wikipedia page,", getTitle(getPage(topic)), "?")
-                info_wanted = input("      (Title, summary, sections, categories, or entire text):      ")
+                print("IMDBot: A page has been found! What would you like to know from the Wikipedia page,", getTitle(getPage(topic)), "? (Title, summary, sections, categories, or entire text)")
+                info_wanted = input(f'{userName}: ')
 
                 if (info_wanted.lower().__contains__("title")):
                     title = getTitle(getPage(topic))

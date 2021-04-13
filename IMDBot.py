@@ -43,7 +43,7 @@ while True:
 
         elif (sy.findSyns(user_input, 'director') == 0 or sy.findSyns(user_input, 'directed') == 0): #find the director of the movie we're talking about and store as object for follow up questions about them
             if 'movie' in locals(): # check if a movie object is already saved (a movie is being spoken about)
-                person = f.findDirector(movie)
+                person = f.findDirector(movie, userName)
             else:
                 print('IMDBot: Sorry, I don\'t know which movie you\'re asking about to find the director. Try to ask me to find a movie :)') # if a movie is not being currently discussed, tell user it doesn't understand 
         
@@ -58,8 +58,8 @@ while True:
                 person = f.whoPlayed(userName, movie, person_name, movie_name)
                 pers = str(person)
 
-                t.wantsTwitterInfo(pers)
-                w.wikiInfo(pers)
+                t.wantsTwitterInfo(pers, userName)
+                w.wikiInfo(pers, userName)
 
                 print(f'IMDBot: What else would you like to know about {pers}?')
             else:
@@ -82,9 +82,9 @@ while True:
             #Search for birthday/birthdate
             print("IMDBot: Hmm... let me think...")
             if 'person' in locals():
-                p.giveBio(person['name'], 1)
+                p.giveBio(person['name'], 1, userName)
             elif person_name != '':
-                p.giveBio(person_name, 1)
+                p.giveBio(person_name, 1, userName)
             else:
                 print("IMDBot: I\'m not sure who you\'re asking about.")
             print("IMDBot: What else would you like to know?")
@@ -93,9 +93,9 @@ while True:
             #Search for birth place of an actor
             print("IMDBot: Hmm... let me think...")
             if 'person' in locals():
-                p.giveBio(person['name'], 2)
+                p.giveBio(person['name'], 2, userName)
             elif person_name != '':
-                p.giveBio(person_name, 2)
+                p.giveBio(person_name, 2, userName)
             else:
                 print("IMDBot: I\'m not sure who you\'re asking about.")
             print("IMDBot: What else would you like to know?")
@@ -104,9 +104,9 @@ while True:
             #Search for a latest movie by an actor
             print("IMDBot: Hmm... let me think...")
             if 'person' in locals():
-                p.giveBio(person['name'], 3)
+                p.giveBio(person['name'], 3, userName)
             elif person_name != '':
-                p.giveBio(person_name, 3)
+                p.giveBio(person_name, 3, userName)
             else:
                 print("IMDBot: I\'m not sure who you\'re asking about.")
             print("IMDBot: What else would you like to know?")
@@ -115,9 +115,9 @@ while True:
             # Gets bio of an actor
             # bio {any actor name}
             if 'person' in locals():
-                p.giveBio(person['name'], 4)
+                p.giveBio(person['name'], 4, userName)
             elif person_name != '':
-                p.giveBio(person_name, 4)
+                p.giveBio(person_name, 4, userName)
             else:
                 print("IMDBot: I\'m not sure who you\'re asking about.")
             print("IMDBot: What else would you like to know?")
@@ -133,7 +133,7 @@ while True:
         elif (('production' and 'company') in user_input or sy.findSyns(user_input, 'companies') == 0):
             print("IMDBot: Okay, let me search the production companies for you!") # buffer for searching companies
             company = c.findCompany(movie) # list the production companies of the movie asked
-            w.wikiInfo(company[0])
+            w.wikiInfo(company[0], userName)
             print('IMDBot: What else would you like to know about the company? :)')
 
         elif ('other' in user_input and sy.findSyns(user_input, 'produce')):
@@ -163,13 +163,15 @@ while True:
 
         elif (("tweet" in user_input) or ("tweets" in user_input) or ("twitter" in user_input)):
             # takes in the user input, asks which person's tweets that want to see and calls searchUser() from twitter.py
-            n = input("IMDBot: Ok, whose tweets would you like to know about?      ")
-            t.searchUser(n)
+            print("IMDBot: Ok, whose tweets would you like to know about?")
+            n = input(f'{userName}: ')
+            t.searchUser(n, userName)
             print("IMDBot: What else would you like to know? ")
 
         elif ("wiki" in user_input) or "wikipedia" in user_input:
-            t = input("IMDBot: Ok, what do you want to search on Wikipedia?      ")
-            w.wikiInfo(t)
+            print("IMDBot: Ok, what do you want to search on Wikipedia?      ")
+            topic = input(f'{userName}: ')
+            w.wikiInfo(topic, userName)
             print("IMDBot: what else can I help you with? ")
 
         else:

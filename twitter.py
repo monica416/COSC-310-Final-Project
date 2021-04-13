@@ -90,11 +90,12 @@ Gets the tweet information depending on what the user specifies
 
 This includes the most recent tweets and a summary of the most recent tweet
 """
-def getTweetInfo(user):
+def getTweetInfo(user, uName):
     if (user == " "):
         pass
     else:
-        num = input("IMDBot: How many tweets would you like to see? ")
+        print("IMDBot: How many tweets would you like to see?")
+        num = input(f'{uName}: ')
 
         tweets_list = getTweets(user, int(num))
 
@@ -102,7 +103,8 @@ def getTweetInfo(user):
         for i in tweets_list:
             print("\n",i)
 
-        ans = input("\nIMDBot: Would you like a summary of their most recent tweet?      ")
+        print("\nIMDBot: Would you like a summary of their most recent tweet?")
+        ans = input(f'{uName}: ')
         if (ans.lower()[0] == "y"):
             print("\n\n*** Most Recent Tweet ***")
             print(tweets_list[0])
@@ -129,7 +131,7 @@ def getTweetInfo(user):
 """
 This class searches for the username / twitter handle based on the name / person that was being talked about
 """
-def searchUser(name):
+def searchUser(name, uName):
     results = []
     userName = " "
     found = False
@@ -139,8 +141,8 @@ def searchUser(name):
         results.append(user.screen_name)
 
     while (found == False and idx <= len(results)):
-        print("IMDBot: ", results[idx])
-        ans = input("IMDBot: Is this the correct twitter handle?      ")
+        print("IMDBot: Is this the correct twitter handle? ->", results[idx])
+        ans = input(f'{uName}: ')
 
         if (ans.lower()[0] == 'y'):
             found = True
@@ -151,7 +153,7 @@ def searchUser(name):
     if (found == False):
         print("IMDBot: Sorry, there is no twitter account for that person")
     else:
-        getTweetInfo(userName)
+        getTweetInfo(userName, uName)
 
 ## Wants twitter info ##
 """
@@ -159,11 +161,12 @@ First class that is called
 
 Asks the user if they would like to view tweets
 """
-def wantsTwitterInfo(user):
-    view = input("IMDBot: Would you like to view " + user + "'s tweets? ")
+def wantsTwitterInfo(user, uName):
+    print("IMDBot: Would you like to view " + user + "'s tweets?")
+    view = input(f'{uName}: ')
 
     if (view.lower()[0] == "y"):
-        searchUser(user)
+        searchUser(user, uName)
     else:
         pass
 

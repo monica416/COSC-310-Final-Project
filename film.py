@@ -16,7 +16,7 @@ def findMovie(userName): # Finds the movie requested by the user
         title = movie['title']
         print("IMDBot: Movie has been found!")
 
-        w.wikiInfo(title + " (film)")
+        w.wikiInfo(title + " (film)", userName)
 
         print(f'IMDBot: What else do you want to know about {title}?') # confirms the movie
         return movie # returns movie object
@@ -63,14 +63,14 @@ def askToContinue(userName):
             print(f'IMDBot: I\'m sorry. I don\'t understand.')
     
 
-def findDirector(movie):
+def findDirector(movie, userName):
     dirList = ''
     try:
         if (len(movie['directors']) == 1):
             print('IMDBot: The director of ' + movie['title'] + ' is ' + movie['directors'][0]['name']) # outputs this if the movie has only one director
             
-            t.wantsTwitterInfo(movie['directors'][0]['name'])
-            w.wikiInfo(movie['directors'][0]['name'])
+            t.wantsTwitterInfo(movie['directors'][0]['name'], userName)
+            w.wikiInfo(movie['directors'][0]['name'], userName)
             
             print('What else would you like to know about the director?')
 
@@ -86,7 +86,7 @@ def findDirector(movie):
             print('IMDBot: The directors of ' + movie['title'] + ' are ' + dirList)
 
             t.wantsTwitterInfo(dirList[0])
-            w.wikiInfo(dirList[0])
+            w.wikiInfo(dirList[0], userName)
 
             print('IMDBot: What else would you like to know about the main director of ' + movie['title'] + '?')
 

@@ -90,7 +90,7 @@ def otherRoles(person):
 #Try to use/call otherRoles in this method because it is calling for filmogrpahy to avoid redundancy 
 #Get Bio of the person such as birthdate and other info
 #left to add... Get the latest movie worked by an actor
-def giveBio(person, x):
+def giveBio(person, x, userName):
     try:
         pers = ia.search_person(person.title())
 
@@ -107,7 +107,7 @@ def giveBio(person, x):
             birthplace = p['birth info']['birth place']
             print("IMDBot: The birth place of ", person.title(),"is", birthplace)
 
-            w.wikiInfo(birthplace)
+            w.wikiInfo(birthplace, userName)
 
             return birthplace
         # x==3 gets latest movie the actor is working 
@@ -115,7 +115,7 @@ def giveBio(person, x):
             personName = person.title()
             latestFilm = p.get('filmography')['actor'][1]
             print(f"IMDBot: The latest movie {personName} has worked in is {latestFilm}")
-            w.wikiInfo(latestFilm + " (film)")
+            w.wikiInfo(latestFilm + " (film)", userName)
         elif(x==4):
             # Bio needs to made shorter
             print(p['biography']) 
